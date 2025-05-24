@@ -30,7 +30,7 @@ const getServices = async (req, res) => {
 
 const getServiceById = async (req, res) => {
   try{
-    const {service_id} = req.params.id;
+    const {service_id} = req.params;
     // //console.log(id);
     const service = await serviceModel.findOne( {_id: service_id} );
     res.status(200).json(service);

@@ -33,20 +33,20 @@ const ProfileAcademicInfo = () => {
   return (
     <div className='border-[1px] border-dark/10 px-3 py-4 text-dark/80 rounded-sm  '>
       <p className='flex items-center gap-2 mb-1'>
-        <FaUniversity className='text-pastle' />
-        <span>University: {userp.user_uni} </span>
+        <FaUniversity className='text-pastle text-lg' />
+        <span>University: {userp?.user_uni || 'Not provided'} </span>
       </p>
       <p className='flex items-center gap-2 mb-1'>
-        <RiBuilding2Fill className='text-pastle' />
-        <span>Department: {userp.user_dep} </span>
+        <RiBuilding2Fill className='text-pastle text-lg' />
+        <span>Department: {userp?.user_dep || 'Not provided'} </span>
       </p>
       <p className='flex items-center gap-2 mb-1'>
-        <FaGraduationCap className='text-pastle' />
-        <span>Program: {userp.user_prog} </span>
+        <FaGraduationCap className='text-pastle text-lg' />
+        <span>Program: {userp?.user_prog || 'Not provided'} </span>
       </p>
       <p className='flex items-center gap-2 mb-1'>
-        <SlCalender className='text-pastle' />
-        <span>Year of Study: {userp.user_year} </span>
+        <SlCalender className='text-pastle ' />
+        <span>Year of Study: {userp?.user_year || 'Not provided'} </span>
       </p>
 
       <Link className='w-[48%] ' >  </Link>

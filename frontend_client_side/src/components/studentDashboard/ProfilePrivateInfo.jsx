@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 
 import { FaUniversity } from "react-icons/fa";
 import { RiBuilding2Fill } from "react-icons/ri";
-import { FaGraduationCap } from "react-icons/fa6";
+import { CiCalendarDate } from "react-icons/ci";
 import { SlCalender } from "react-icons/sl";
 
 import { MdOutlineUpdate } from 'react-icons/md';
-import UpdateAcadmeicModal from './UpdateAcadmeicModal';
+import { FaPhoneAlt } from "react-icons/fa";
 import { getUserByEmail } from '../../apis/userApi';
 import { AuthContext } from '../../contexts/AuthProvider';
 import UpdatePrivateModal from './UpdatePrivateModal';
@@ -33,12 +33,12 @@ const ProfilePrivateInfo = () => {
   return (
     <div className='border-[1px] border-dark/10 px-3 py-4 text-dark/80 rounded-sm  '>
       <p className='flex items-center gap-2 mb-1'>
-        <FaUniversity className='text-pastle' />
-        <span>Date of Birth: {userp.user_dob} </span>
+        <span className='text-xl'> <CiCalendarDate className='text-pastle' /> </span>
+        <span>Date of Birth: {userp?.user_dob || 'Not provided'} </span>
       </p>
       <p className='flex items-center gap-2 mb-1'>
-        <RiBuilding2Fill className='text-pastle' />
-        <span>Phone numbers: {userp.user_phone} </span>
+        <FaPhoneAlt className='text-pastle' />
+        <span>Phone numbers: {userp?.user_phone || 'Not provided'} </span>
       </p>
       
       <Link className='w-[48%]' >  </Link>

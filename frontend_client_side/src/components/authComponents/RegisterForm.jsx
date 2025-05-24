@@ -119,7 +119,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className='max-w-[420px] mx-auto bg-orchid/15 my-14 shadow-lg p-6 rounded-lg'>
+    <div className='max-w-[420px] mx-auto bg-pastle/15 my-14 shadow-lg p-6 rounded-lg'>
       <h3 className='text-center font-semibold text-2xl md:text-3xl'> Register Your Account </h3>
       <p className='text-center mt-2 flex justify-center items-center gap-1 '>
         <span className='text-xl'> <FcGoogle /> </span> continue with 
@@ -152,7 +152,7 @@ const RegisterForm = () => {
         {error && <div className='text-sm text-red-600 pt-3 mr-3'>{error}</div>}
 
         <div className="form-control mt-4">
-          <button className="btn bg-purple text-white w-full"> Register </button>
+          <button className="btn bg-pastle text-white w-full"> Register </button>
         </div>
 
         <p className='text-center text-sm mt-3'>

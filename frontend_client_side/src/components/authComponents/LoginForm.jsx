@@ -68,7 +68,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className='max-w-[420px] mx-auto bg-orchid/15 my-14 shadow-lg p-6 rounded-lg'>
+    <div className='max-w-[420px] mx-auto bg-pastle/15 my-14 shadow-lg p-6 rounded-lg'>
       <h3 className='text-center font-semibold text-2xl md:text-3xl'>Login Your Account</h3>
       <p className='text-center mt-2 flex justify-center items-center gap-1'> <FcGoogle className='text-xl' /> Continue with <button onClick={handleGoogleSignIn} className='text-blue-500 underline'>Google</button> </p>
       
@@ -96,7 +96,7 @@ const LoginForm = () => {
 
         {/* login button */}
         <div className="form-control mt-4"> 
-          <button className="btn bg-purple text-white w-full">Login</button>
+          <button className="btn bg-pastle text-white w-full">Login</button>
         </div>
 
         <p className='text-center text-sm mt-3'> Don’t Have An Account? <Link to='/auth/register' className='text-red-500 ml-1'>Register</Link> </p>
