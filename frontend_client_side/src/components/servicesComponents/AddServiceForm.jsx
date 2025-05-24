@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { createService } from '../../apis/serviceApi';
 import axiosInstance from '../../config/axiosInstance';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 
 const image_hosting_key = import.meta.env.VITE_Image_Upload_token;
@@ -9,6 +10,8 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 
 const AddServiceForm = () => {
+  const { user } = useContext(AuthContext);    //ei user jeta firebase e save hoye ace
+  const user_email = user.email;
 
   const [previewUrl, setPreviewUrl] = useState(null);
 
@@ -56,7 +59,8 @@ const AddServiceForm = () => {
       user_uni,
       service_price,
       user_phone,
-      service_image
+      service_image,
+      posted_by: user_email
     };
 
     console.log(service)

@@ -12,6 +12,8 @@ const serviceSchema = new mongoose.Schema({
   user_uni: {type: String, required: true},
   service_price: {type: String, required: true},
   user_phone: {type: String, required: true},  
+  // user_email
+  posted_by: {type: String, required: true}
 })
 
 module.exports = mongoose.model('Service', serviceSchema);

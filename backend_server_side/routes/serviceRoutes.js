@@ -3,7 +3,8 @@ const router = express.Router();
 const { 
   createService,
   getServices,
-  getServicePrice
+  getServicePrice,
+  getServiceById
 } = require('../controllers/serviceControllers');
 
 
@@ -11,6 +12,8 @@ const {
 router.post('/services', createService);
 // show all users -> get
 router.get('/services', getServices);
+// get service by id
+router.get('/services/:service_id', getServiceById);
 // get service_price 
 router.get('/services/:service_id/service_price', getServicePrice)
 

@@ -5,6 +5,7 @@ const createService = async (req, res) => {
   try{
     // //console.log('post api hitting');
     const service = req.body;
+    console.log(req.body)
 
     const createdService = await serviceModel.create(service);
     res.status(200).json(createdService);
@@ -27,6 +28,19 @@ const getServices = async (req, res) => {
 }
 
 
+const getServiceById = async (req, res) => {
+  try{
+    const {service_id} = req.params.id;
+    // //console.log(id);
+    const service = await serviceModel.findOne( {_id: service_id} );
+    res.status(200).json(service);
+  }
+  catch(e){
+    res.status(500).json({ message: 'Internal server error: ', error:e.message });
+  }
+}
+
+
 const getServicePrice = async (req, res) => {
   try{
     const { service_id } = req.params;
@@ -42,5 +56,6 @@ const getServicePrice = async (req, res) => {
 module.exports = { 
   createService,
   getServices,
-  getServicePrice
+  getServicePrice,
+  getServiceById
 };

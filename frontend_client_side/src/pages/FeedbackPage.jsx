@@ -14,12 +14,12 @@ const FeedbackPage = () => {
     setFeedbacks(data);
   }
 
+  
   useEffect(() => {
     fetchFeedbacks();
   }, [])
 
   
-
 
   return (
     <div className='w-[80%] mx-auto dark:text-white mt-8 '>
