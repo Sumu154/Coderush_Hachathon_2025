@@ -42,7 +42,7 @@ const getToken = (req, res) => {
 const get_session = async (req, res) => {
   try {
       const token = req.cookies.token; // Get the token from cookies
-      console.log(token)
+      // console.log(token)
       if (!token) {
           return res.status(401).json({ message: 'Not authenticated' });
       }
