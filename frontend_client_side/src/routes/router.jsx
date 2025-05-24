@@ -11,6 +11,7 @@ import AuthLayout from "../layouts/AuthLayout";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import HomePage from "../pages/HomePage";
+import AddItemPage from "../pages/AddItemPage";
 
 
 
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage></HomePage>
+      },
+      {
+        path: "/add-item",
+        element: <AddItemPage />
       }
     ]
   },
