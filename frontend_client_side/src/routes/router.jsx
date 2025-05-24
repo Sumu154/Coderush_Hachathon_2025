@@ -20,6 +20,7 @@ import ServicePaymentPage from "../pages/ServicePaymentPage";
 import ServicePage from "../pages/ServicePage";
 import MessagesPage from "../pages/MessagesPage";
 import FeedbackPage from "../pages/FeedbackPage";
+import ServiceDetailsPage from "../pages/ServiceDetailsPage";
 
 
 
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/servicePage",
         element: <ServicePage />
+      },
+      {
+        path: "/services/:id",
+        element: <ServiceDetailsPage />
       }
     ]
   },
