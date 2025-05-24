@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getServiceById } from '../apis/serviceApi';
+import axiosInstance from '../config/axiosInstance';
 import {
     Container,
     Typography,
@@ -24,47 +25,34 @@ const ServiceDetailsPage = () => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
-    const handleSendMessage = async ({item}) => {
+    const handleSendMessage = async () => {
         try {
-
-            if (!item.posted_by) {
-                throw new Error('Cannot send message: Item poster information is missing');
+            if (!service.user_uni) {
+                throw new Error('Cannot send message: User UNI information is missing');
             }
 
-            const image = item.service_image;
+            const image = service.service_image;
             let imageData = null;
 
             if (image) {
-                try {
-                    imageData = {
-                        data: btoa(
-                            new Uint8Array(image.data.data).reduce((data, byte) => data + String.fromCharCode(byte), '')
-                        ),
-                        contentType: image.contentType,
-                        fileName: image.name,
-                    };
-                } catch (imageError) {
-                    console.error('Error processing image:', imageError);
-                }
+                imageData = {
+                    url: image,
+                    // You might need to adjust this depending on how the image is stored
+                };
             }
 
-            const response = await fetch(`http://localhost:3000/api/messages/send`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-                body: JSON.stringify({
-                    receiver: item.posted_by,
-                    text: `I am interested in the item: ${item.service_title}`,
-                    conversationId: null,
-                    image: imageData,
-                }),
+            const response = await axiosInstance.post('/messages/send', {
+                receiver: service.user_uni,
+                text: `I am interested in the service: ${service.service_title}`,
+                conversationId: null,
+                image: imageData,
+            },
+            {
+                withCredentials: true,
             });
 
-            if (!response.ok) {
-                const responseData = await response.json();
-                throw new Error(responseData.message || 'Failed to send message');
+            if (response.status !== 200) {
+                throw new Error(response.data.message || 'Failed to send message');
             }
 
             alert('Message sent successfully!');
@@ -220,7 +208,7 @@ const ServiceDetailsPage = () => {
                     <Button variant="contained" sx={{ bgcolor: 'red', '&:hover': { bgcolor: 'darkred' } }}>
                         Pay
                     </Button>
-                    <Button onClick={() => handleSendMessage(service)} variant="contained" sx={{ bgcolor: 'blue', '&:hover': { bgcolor: 'darkblue' } }}>
+                    <Button onClick={handleSendMessage} variant="contained" sx={{ bgcolor: 'blue', '&:hover': { bgcolor: 'darkblue' } }}>
                         Send Message
                     </Button>
                     <Button variant="outlined" onClick={handleGoBack}>
