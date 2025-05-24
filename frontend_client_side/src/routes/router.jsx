@@ -19,6 +19,7 @@ import AddServicePage from "../pages/AddServicePage";
 import ServicePaymentPage from "../pages/ServicePaymentPage";
 import ServicePage from "../pages/ServicePage";
 import MessagesPage from "../pages/MessagesPage";
+import FeedbackPage from "../pages/FeedbackPage";
 
 
 
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <ProfilePage />
+      },
+      {
+        path: "/dashboard/feedbacks",
+        element: <PrivateRoute> <FeedbackPage></FeedbackPage> </PrivateRoute>
       }
     ]
   },

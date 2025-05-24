@@ -6,9 +6,9 @@ const feedbackSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  course: {
+  service: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Course',
+    ref: 'Service',
     required: true
   },
   feedback_rating: {

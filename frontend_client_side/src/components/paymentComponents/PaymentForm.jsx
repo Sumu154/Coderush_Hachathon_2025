@@ -9,6 +9,7 @@ import { getPaymentIntent } from '../../apis/paymentApi';
 // import { createEnrollment } from '../../apis/enrollmentApi';
 import { AuthContext } from '../../contexts/AuthProvider';
 import { toast } from 'react-toastify';
+import StudentFeedbackModal from '../studentDashboard/StudentFeedbackModal';
 // import { getTeacherName, updateUserEnrollment } from '../../apis/courseApi';
 
 
@@ -24,7 +25,8 @@ const PaymentForm = ( { service_id, service_price } ) => {
   const [ processing, setProcessing ] = useState(false);
   const [ success, setSuccess ] = useState(false);
 
-
+  // feedback modal
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handlePayment = async (e) => {
     e.preventDefault();
@@ -78,6 +80,9 @@ const PaymentForm = ( { service_id, service_price } ) => {
           customClass: {
             popup: 'small-modal'
           }
+        }).then(() => {
+          // Automatically open feedback modal after OK pressed
+          setModalOpen(true);
         });
       }
     } 
@@ -99,6 +104,7 @@ const PaymentForm = ( { service_id, service_price } ) => {
           </div> 
       </form>
 
+      <StudentFeedbackModal service_id={service_id} modalOpen={modalOpen} setModalOpen={setModalOpen} ></StudentFeedbackModal>
       {error && <p className="text-sm text-redd mt-2">{error}</p>}
       {success && <p className="text-sm text-dollargreen mt-2"> Payment Successful!</p>}
     </div>

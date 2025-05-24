@@ -47,7 +47,7 @@ const Sidebar =  () => {
 
   const adminLinks = <>
   <li> <NavLink to="/dashboard" > <div className='flex gap-2 items-center text-[17px] mb-2 hover:font-semibold'> <CgProfile className='text-lg' /> <span> Profile </span> </div> </NavLink> </li>
-  <li> <NavLink to="/dashboard/adminUsers" className={({ isActive }) => isActive ? "font-semibold" : ""}> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <HiUsers className='text-xl'/> <span> All Users </span> </div> </NavLink> </li>
+  <li> <NavLink to="/dashboard/feedbacks" className={({ isActive }) => isActive ? "font-semibold" : ""}> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <HiUsers className='text-xl'/> <span> All Users </span> </div> </NavLink> </li>
   <li> <NavLink to="/dashboard/adminClasses" className={({ isActive }) => isActive ? "font-semibold" : ""}> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <MdClass  className='text-xl'/> <span> All classes </span> </div> </NavLink> </li>
   <li> <NavLink to="/dashboard/adminTeachers" className={({ isActive }) => isActive ? "font-semibold" : ""}> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <MdRequestPage className='text-xl' /> <span> Teacher request </span> </div> </NavLink> </li>
   </>
@@ -63,7 +63,7 @@ const Sidebar =  () => {
       <div className='hidden md:block w-44 lg:w-52 bg-pastle text-white  md:min-h-screen '>
         <ul className='list-none pt-28 ml-4 lg:ml-8  '>
         {user_role==='student' ? studentLinks 
-        :user_role==='teacher' ? teacherLinks
+        // :user_role==='teacher' ? teacherLinks
         :user_role==='admin' ? adminLinks
         : ''
         }
@@ -80,7 +80,7 @@ const Sidebar =  () => {
         <div className="text-white min-h-screen p-4">
         <ul className='list-none pt-28 ml-4 lg:ml-8  '>
         {user_role==='student' ? studentLinks 
-        :user_role==='teacher' ? teacherLinks
+        // :user_role==='teacher' ? teacherLinks
         :user_role==='admin' ? adminLinks
         : ''
         }
