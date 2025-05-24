@@ -3,6 +3,7 @@ const connectDB = require('../config/db');
 
 const serviceSchema = new mongoose.Schema({
   service_title: {type: String, required: true},
+  service_image: {type: String, required: true},
   service_category: {type: String, required: true},
   service_listing_type: {type: String, required: true},
   service_condition: {type: String, required: true},

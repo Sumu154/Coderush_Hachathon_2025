@@ -30,10 +30,12 @@ const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 const serviceRoutes = require('./routes/serviceRoutes')
 const messageRoutes = require('./routes/messageRoutes');
+const paymentRoutes = require('./routes/paymentRoutes')
 
 app.use('/api', userRoutes)
 app.use('/api', authRoutes)
 app.use('/api', serviceRoutes)
+app.use('/api', paymentRoutes)
 
 // app.use('/api/messages', messageRoutes);
 

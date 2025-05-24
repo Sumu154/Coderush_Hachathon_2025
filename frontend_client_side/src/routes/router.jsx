@@ -16,6 +16,10 @@ import ProfilePage from "../pages/ProfilePage";
 import Services from "../pages/Services";
 import AddServiceForm from "../components/servicesComponents/AddServiceForm";
 import AddServicePage from "../pages/AddServicePage";
+import ServicePaymentPage from "../pages/ServicePaymentPage";
+
+
+
 
 const router = createBrowserRouter([
   {
@@ -33,6 +37,13 @@ const router = createBrowserRouter([
       {
         path: "/addServices",
         element: <AddServicePage></AddServicePage>
+      },
+      {
+        path: "/services/:id/payment",
+        element: <PrivateRoute> <ServicePaymentPage></ServicePaymentPage>  </PrivateRoute>,
+        loader: ({params}) => {
+          return params.id;
+        }
       },
       {
         path: "/add-item",

@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AddServiceForm from '../components/servicesComponents/AddServiceForm';
-import AddServiceImage from '../components/servicesComponents/AddServiceImage';
 
 const AddServicePage = () => {
+  const [ service_image, setService_image ] = useState({})
+  const [ service_info, setService_info ] = useState({})
+
+  
+
+
   return (
-    <div className='flex justify-between gap-4 mt-16' >
+    <div className=' mt-[100px] w-[80%] mx-auto '>
+      <div className='flex justify-center'> <h3 className='px-3 text-center  border-b-[2px] border-pastle font-semibold mb-8 text-2xl md:text-3xl'> Add Service </h3> </div>
+     
       <AddServiceForm></AddServiceForm>
-      <AddServiceImage></AddServiceImage>
+
     </div>
+    
   );
 };
 
 export default AddServicePage;
+

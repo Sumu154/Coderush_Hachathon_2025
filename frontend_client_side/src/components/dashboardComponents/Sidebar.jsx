@@ -52,11 +52,11 @@ const Sidebar =  () => {
   <li> <NavLink to="/dashboard/adminTeachers" className={({ isActive }) => isActive ? "font-semibold" : ""}> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <MdRequestPage className='text-xl' /> <span> Teacher request </span> </div> </NavLink> </li>
   </>
 
-  const teacherLinks = <>
-  <li> <NavLink to="/dashboard"> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <CgProfile className='text-lg' /> <span> Profile </span> </div> </NavLink> </li>
-  <li> <NavLink to="/dashboard/addClass" className={({ isActive }) => isActive ? "font-semibold" : ""}> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <MdLibraryAdd className='text-xl' /> <span> Add class </span> </div> </NavLink> </li>
-  <li> <NavLink to="/dashboard/teacherClasses" className={({ isActive }) => isActive ? "font-semibold" : ""}> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <MdClass className='text-xl' /><span> My classes </span> </div> </NavLink> </li>
-  </>
+  // const teacherLinks = <>
+  // <li> <NavLink to="/dashboard"> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <CgProfile className='text-lg' /> <span> Profile </span> </div> </NavLink> </li>
+  // <li> <NavLink to="/dashboard/addClass" className={({ isActive }) => isActive ? "font-semibold" : ""}> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <MdLibraryAdd className='text-xl' /> <span> Add class </span> </div> </NavLink> </li>
+  // <li> <NavLink to="/dashboard/teacherClasses" className={({ isActive }) => isActive ? "font-semibold" : ""}> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <MdClass className='text-xl' /><span> My classes </span> </div> </NavLink> </li>
+  // </>
 
   return (
     <div className=''>
