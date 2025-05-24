@@ -15,7 +15,11 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
-const categories = ['Electronics', 'Furniture', 'Books', 'Clothing', 'Other'];
+const categories = ['Electronics', 'Furniture', 'Books', 'Services', 'Clothing', 'Other'];
+const listingTypes = ['item', 'service'];
+const conditions = ['new', 'like new', 'good', 'fair', 'poor'];
+const pricingTypes = ['fixed', 'bidding', 'hourly'];
+const visibilities = ['university_only', 'all_students'];
 
 // Map: Click to set marker
 const LocationSelector = ({ setItemData }) => {
@@ -94,7 +98,12 @@ function AddItemPage() {
     title: '',
     description: '',
     category: '',
+    listingType: 'item',
+    condition: '',
     price: '',
+    pricingType: 'fixed',
+    visibility: 'university_only',
+    university: '',
     negotiable: false,
     email: '',
     phone: '',
@@ -194,7 +203,12 @@ function AddItemPage() {
       title: '',
       description: '',
       category: '',
+      listingType: 'item',
+      condition: '',
       price: '',
+      pricingType: 'fixed',
+      visibility: 'university_only',
+      university: '',
       negotiable: false,
       email: '',
       phone: '',
@@ -210,7 +224,6 @@ function AddItemPage() {
 
   return (
     <>
-      
       <div className="AddItemPage">
         <div className="formContainer">
           <form onSubmit={handleSubmit}>
@@ -240,6 +253,68 @@ function AddItemPage() {
                 </MenuItem>
               ))}
             </TextField>
+            <TextField
+              select
+              fullWidth
+              label="Listing Type"
+              name="listingType"
+              value={itemData.listingType}
+              onChange={handleChange}
+              required
+            >
+              {listingTypes.map((type) => (
+                <MenuItem key={type} value={type}>{type}</MenuItem>
+              ))}
+            </TextField>
+            {itemData.listingType === 'item' && (
+              <TextField
+                select
+                fullWidth
+                label="Condition"
+                name="condition"
+                value={itemData.condition}
+                onChange={handleChange}
+              >
+                {conditions.map((cond) => (
+                  <MenuItem key={cond} value={cond}>{cond}</MenuItem>
+                ))}
+              </TextField>
+            )}
+            <TextField
+              select
+              fullWidth
+              label="Pricing Type"
+              name="pricingType"
+              value={itemData.pricingType}
+              onChange={handleChange}
+              required
+            >
+              {pricingTypes.map((type) => (
+                <MenuItem key={type} value={type}>{type}</MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              select
+              fullWidth
+              label="Visibility"
+              name="visibility"
+              value={itemData.visibility}
+              onChange={handleChange}
+              required
+            >
+              {visibilities.map((vis) => (
+                <MenuItem key={vis} value={vis}>{vis.replace('_', ' ')}</MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              fullWidth
+              label="University"
+              name="university"
+              value={itemData.university}
+              onChange={handleChange}
+              required
+              helperText="This should be auto-filled from user profile"
+            />
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', width: '100%', gap: 2 }}>
               <TextField
                 sx={{ flex: '0 0 80%' }}
