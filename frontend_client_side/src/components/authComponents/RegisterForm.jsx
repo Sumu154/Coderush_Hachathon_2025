@@ -12,6 +12,11 @@ import { createToken } from '../../apis/authApi';
 import { validPassword } from '../../Utils/Validators/passValidator'
 
 
+const image_hosting_key = import.meta.env.VITE_Image_Upload_token;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
+
+
+
 
 const RegisterForm = () => {
   const navigate = useNavigate();
@@ -25,6 +30,8 @@ const RegisterForm = () => {
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
 
+    
+
     // get the form data
     const form = new FormData(e.target);
     const user_name = form.get('name');
@@ -33,6 +40,14 @@ const RegisterForm = () => {
     const password = form.get('password');
     const user_role = 'student';
     const course_enrollment = 0;
+
+    const imageFile = {image : data.image[0]}
+        const res = await axioPublic.post(image_hosting_api, imageFile, {
+            headers: {
+                "content-type": "multipart/form-data",
+              }
+        })
+
     const user = { user_name, user_email, user_image, password, user_role, course_enrollment };
     //console.log(user);
 
