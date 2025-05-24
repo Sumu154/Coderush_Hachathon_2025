@@ -1,189 +1,188 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Typography, CircularProgress, Alert, TextField, InputAdornment, IconButton, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import CloseIcon from '@mui/icons-material/Close';
-import ServiceList from './ServiceList';
-//import AppNavbar from '../components/Navbar';
-import { useLocation } from 'react-router-dom';
-//import './ServicePage.css'; // Assuming you have a CSS file for styles
-import '../css/ServicePage.css';
+import React from 'react';
+import {
+    Card,
+    CardMedia,
+    CardContent,
+    Typography,
+    Box,
+    Button,
+    Chip,
+    Divider,
+    Grid,
+    Tooltip,
+} from '@mui/material';
+import CategoryIcon from '@mui/icons-material/Category';
+import PhoneIcon from '@mui/icons-material/Phone';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import PriceChangeIcon from '@mui/icons-material/PriceChange';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import { useNavigate } from 'react-router-dom';
 
-const ServicePage = () => {
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const categoryParam = queryParams.get('category');
-    const keywordParam = queryParams.get('keyword');
+const ServiceCard = ({ service }) => {
+    const navigate = useNavigate();
 
-    const [services, setServices] = useState([]);
-    const [filteredServices, setFilteredServices] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [searchQuery, setSearchQuery] = useState(keywordParam || '');
-    const [sortOption, setSortOption] = useState('default');
-
-    useEffect(() => {
-        fetchServices();
-    }, []);
-
-    useEffect(() => {
-        applyFiltersAndSort();
-    }, [services, searchQuery, categoryParam, sortOption]);
-
-    useEffect(() => {
-        setSearchQuery(keywordParam || '');
-    }, [keywordParam]);
-
-    const fetchServices = async () => {
-        try {
-            setLoading(true);
-            const response = await fetch('http://localhost:3000/api/services', {
-                credentials: 'include'
-            });
-            if (!response.ok) {
-                throw new Error(`Error ${response.status}: ${response.statusText}`);
-            }
-            const data = await response.json();
-            setServices(data);
-            setFilteredServices(data);
-        } catch (err) {
-            setError(err.message || 'Failed to fetch services');
-            console.error('Error fetching services:', err);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const applyFiltersAndSort = () => {
-        let filtered = [...services];
-
-        if (searchQuery.trim() !== '') {
-            const query = searchQuery.toLowerCase();
-            filtered = filtered.filter(service =>
-                service.service_title.toLowerCase().includes(query) ||
-                (service.service_category && service.service_category.toLowerCase().includes(query))
-            );
-        }
-
-        if (categoryParam) {
-            filtered = filtered.filter(service =>
-                service.service_category.toLowerCase().includes(categoryParam.toLowerCase())
-            );
-        }
-
-        // Sorting
-        switch (sortOption) {
-            case 'name_asc':
-                filtered.sort((a, b) => a.service_title.localeCompare(b.service_title));
-                break;
-            case 'name_desc':
-                filtered.sort((a, b) => b.service_title.localeCompare(a.service_title));
-                break;
-            case 'price_asc':
-                filtered.sort((a, b) => Number(a.service_price) - Number(b.service_price));
-                break;
-            case 'price_desc':
-                filtered.sort((a, b) => Number(b.service_price) - Number(a.service_price));
-                break;
-            default:
-                break;
-        }
-
-        setFilteredServices(filtered);
-    };
-
-    const handleSortChange = (event) => {
-        setSortOption(event.target.value);
-    };
-
-    const handleSearchChange = (e) => {
-        setSearchQuery(e.target.value);
-    };
-
-    const handleClearSearch = () => {
-        setSearchQuery('');
+    const handleViewDetails = () => {
+        navigate(`/services/${service._id}`);
     };
 
     return (
-        <>
-            
-            <Box className="content service-content" display="flex" justifyContent="center" alignItems="center" flexDirection="column" mb={6}>
-                <Typography variant="h4" component="h1" className="page-title" mb={6}>
-                    Services for Sale
-                </Typography>
-
-                {/* Search Bar and Sort */}
-                <Box sx={{
-                    width: '80%',
-                    maxWidth: '50rem',
-                    mb: 3,
-                    mx: 'auto',
-                    display: 'flex',
-                    flexDirection: { xs: 'column', sm: 'row' },
-                    gap: 2
-                }}>
-                    <TextField
-                        fullWidth
-                        placeholder="Search services by title or category"
-                        value={searchQuery}
-                        onChange={handleSearchChange}
-                        variant="outlined"
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <SearchIcon sx={{ color: '#2d4f8f' }} />
-                                </InputAdornment>
-                            ),
-                            endAdornment: searchQuery && (
-                                <InputAdornment position="end">
-                                    <IconButton onClick={handleClearSearch} edge="end" size="small">
-                                        <CloseIcon />
-                                    </IconButton>
-                                </InputAdornment>
-                            )
-                        }}
+        <Card
+            className="service-card-horizontal"
+            sx={{
+                height: 'auto',
+                mb: 2,
+                borderRadius: 3,
+                boxShadow: '0 4px 24px rgba(45, 79, 143, 0.08)',
+                transition: 'transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s',
+                '&:hover': {
+                    transform: 'translateY(-6px) scale(1.01)',
+                    boxShadow: '0 8px 32px rgba(45, 79, 143, 0.16)',
+                },
+                background: 'linear-gradient(90deg, #f8fbff 60%, #eaf1fb 100%)'
+            }}
+        >
+            <Grid container sx={{ height: '100%' }}>
+                <Grid item xs={12} md={4}>
+                    <Box
                         sx={{
-                            '& .MuiOutlinedInput-root': {
-                                '&.Mui-focused fieldset': {
-                                    borderColor: '#2d4f8f',
-                                }
-                            }
+                            height: { xs: '180px', md: '220px' },
+                            width: '100%',
+                            overflow: 'hidden',
+                            borderRadius: 2,
+                            boxShadow: '0 2px 8px rgba(45, 79, 143, 0.07)'
                         }}
-                    />
-                    <FormControl sx={{ minWidth: 180 }}>
-                        <InputLabel id="sort-label">Sort By</InputLabel>
-                        <Select
-                            labelId="sort-label"
-                            value={sortOption}
-                            label="Sort By"
-                            onChange={handleSortChange}
-                        >
-                            <MenuItem value="default">Newest First</MenuItem>
-                            <MenuItem value="name_asc">Name (A-Z)</MenuItem>
-                            <MenuItem value="name_desc">Name (Z-A)</MenuItem>
-                            <MenuItem value="price_asc">Price (Low to High)</MenuItem>
-                            <MenuItem value="price_desc">Price (High to Low)</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Box>
-
-                <Box className="main-container" width="100%" maxWidth="1200px" mb={4}>
-                    {loading ? (
-                        <Box className="loading-container" mb={4}>
-                            <CircularProgress style={{ color: '#2d4f8f' }} />
-                        </Box>
-                    ) : error ? (
-                        <Alert severity="error" className="error-alert" mb={4}>
-                            {error}
-                        </Alert>
-                    ) : (
-                        <ServiceList
-                            services={filteredServices}
+                    >
+                        <CardMedia
+                            component="img"
+                            sx={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                                objectPosition: 'center',
+                                borderRadius: 2,
+                                transition: 'transform 0.3s',
+                                '&:hover': {
+                                    transform: 'scale(1.04)'
+                                }
+                            }}
+                            image={service.service_image || 'https://via.placeholder.com/300x200?text=No+Image'}
+                            alt={service.service_title}
                         />
-                    )}
-                </Box>
-            </Box>
-        </>
+                    </Box>
+                </Grid>
+
+                <Grid item xs={12} md={8}>
+                    <CardContent sx={{ p: { xs: 1.5, md: 2 } }}>
+                        <Typography
+                            variant="h5"
+                            component="h3"
+                            className="service-title"
+                            gutterBottom
+                            sx={{
+                                fontWeight: 700,
+                                color: '#2d4f8f',
+                                letterSpacing: 0.2,
+                                mb: 1
+                            }}
+                        >
+                            {service.service_title}
+                        </Typography>
+
+                        <Divider sx={{ my: 1 }} />
+
+                        <Box sx={{ mb: 1.5 }}>
+                            <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
+                                <b>Category:</b> {service.service_category} &nbsp;|&nbsp;
+                                <b>Listing:</b> {service.service_listing_type} &nbsp;|&nbsp;
+                                <b>Condition:</b> {service.service_condition}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
+                                <b>Pricing:</b> {service.service_pricing_type} &nbsp;|&nbsp;
+                                <b>Visibility:</b> {service.service_visibility}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
+                                <b>User UNI:</b> {service.user_uni}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
+                                <b>Price:</b> {service.service_price}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
+                                <b>User Phone:</b> {service.user_phone}
+                            </Typography>
+                        </Box>
+
+                        <Divider sx={{ my: 1 }} />
+
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 1 }}>
+                            <Tooltip title="Category" arrow>
+                                <Chip
+                                    icon={<CategoryIcon />}
+                                    label={service.service_category}
+                                    size="small"
+                                    sx={{
+                                        backgroundColor: '#f0f3f9',
+                                        color: '#2d4f8f',
+                                        fontWeight: 500
+                                    }}
+                                />
+                            </Tooltip>
+                            <Tooltip title="Visibility" arrow>
+                                <Chip
+                                    icon={<VisibilityIcon />}
+                                    label={service.service_visibility}
+                                    size="small"
+                                    variant="outlined"
+                                />
+                            </Tooltip>
+                            <Tooltip title="Price" arrow>
+                                <Chip
+                                    icon={<PriceChangeIcon />}
+                                    label={service.service_price}
+                                    size="small"
+                                    variant="outlined"
+                                />
+                            </Tooltip>
+                            <Tooltip title="User UNI" arrow>
+                                <Chip
+                                    icon={<AssignmentIndIcon />}
+                                    label={service.user_uni}
+                                    size="small"
+                                    variant="outlined"
+                                />
+                            </Tooltip>
+                            <Tooltip title="Phone" arrow>
+                                <Chip
+                                    icon={<PhoneIcon />}
+                                    label={service.user_phone}
+                                    size="small"
+                                    variant="outlined"
+                                />
+                            </Tooltip>
+                        </Box>
+
+                        <Button
+                            variant="contained"
+                            size="medium"
+                            onClick={handleViewDetails}
+                            sx={{
+                                bgcolor: "#2d4f8f",
+                                '&:hover': {
+                                    bgcolor: '#1e3a6a',
+                                },
+                                minWidth: '120px',
+                                mt: 2,
+                                borderRadius: 2,
+                                fontWeight: 600,
+                                letterSpacing: 0.5
+                            }}
+                        >
+                            View Details
+                        </Button>
+                    </CardContent>
+                </Grid>
+            </Grid>
+        </Card>
     );
 };
 
-export default ServicePage;
+export default ServiceCard;
