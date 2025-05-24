@@ -23,6 +23,8 @@ const visibilities = ['university_only', 'all_students'];
 
 // Map: Click to set marker
 const LocationSelector = ({ setItemData }) => {
+
+
   useMapEvents({
     click(e) {
       if (e.originalEvent.target.closest('.move-to-current-location-button')) {
@@ -93,6 +95,18 @@ const MoveToCurrentLocation = ({ setItemData }) => {
   );
 };
 
+function MapCenterUpdater({ position }) {
+  const map = useMap();
+
+  React.useEffect(() => {
+    if (position && position.latitude && position.longitude) {
+      map.flyTo([position.latitude, position.longitude], 17);
+    }
+  }, [position, map]);
+
+  return null;
+}
+
 function AddItemPage() {
   const [itemData, setItemData] = useState({
     title: '',
@@ -101,8 +115,8 @@ function AddItemPage() {
     listingType: 'item',
     condition: '',
     price: '',
-    pricingType: 'fixed',
-    visibility: 'university_only',
+    pricingType: '',
+    visibility: '',
     university: '',
     negotiable: false,
     email: '',
@@ -110,6 +124,8 @@ function AddItemPage() {
     images: [],
     location: { address: '', geolocation: { latitude: 23.9475, longitude: 90.3792 } }
   });
+
+  
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: '' });
   const fileInputRef = useRef(null);
 
@@ -227,7 +243,11 @@ function AddItemPage() {
       <div className="AddItemPage">
         <div className="formContainer">
           <form onSubmit={handleSubmit}>
+
+            {/* title */}
             <TextField fullWidth label="Title" name="title" value={itemData.title} onChange={handleChange} required />
+            
+            {/* description */}
             <TextField
               fullWidth
               label="Description"
@@ -238,6 +258,8 @@ function AddItemPage() {
               onChange={handleChange}
               required
             />
+
+            {/* catagory */}
             <TextField
               select
               fullWidth
@@ -253,6 +275,8 @@ function AddItemPage() {
                 </MenuItem>
               ))}
             </TextField>
+
+            {/* listing type */}
             <TextField
               select
               fullWidth
@@ -266,6 +290,8 @@ function AddItemPage() {
                 <MenuItem key={type} value={type}>{type}</MenuItem>
               ))}
             </TextField>
+
+            {/* item condition */}
             {itemData.listingType === 'item' && (
               <TextField
                 select
@@ -280,6 +306,9 @@ function AddItemPage() {
                 ))}
               </TextField>
             )}
+
+
+            {/* pricing type */}
             <TextField
               select
               fullWidth
@@ -293,6 +322,9 @@ function AddItemPage() {
                 <MenuItem key={type} value={type}>{type}</MenuItem>
               ))}
             </TextField>
+
+
+            {/* visibility */}
             <TextField
               select
               fullWidth
@@ -306,6 +338,8 @@ function AddItemPage() {
                 <MenuItem key={vis} value={vis}>{vis.replace('_', ' ')}</MenuItem>
               ))}
             </TextField>
+
+            {/* university */}
             <TextField
               fullWidth
               label="University"
@@ -315,6 +349,8 @@ function AddItemPage() {
               required
               helperText="This should be auto-filled from user profile"
             />
+
+            {/* price */}
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', width: '100%', gap: 2 }}>
               <TextField
                 sx={{ flex: '0 0 80%' }}
@@ -354,6 +390,8 @@ function AddItemPage() {
               onChange={handleChange}
               required
             />
+
+            {/* phone number */}
             <TextField
               fullWidth
               label="Phone Number"
@@ -371,7 +409,11 @@ function AddItemPage() {
                 inputMode: 'tel',
               }}
             />
+
+            {/* address */}
             <TextField fullWidth label="Address" name="location.address" value={itemData.location.address} onChange={handleChange} required />
+            
+            {/* image */}
             <Input
               type="file"
               inputRef={fileInputRef}
@@ -431,6 +473,9 @@ function AddItemPage() {
                 </div>
               ))}
             </div>
+
+
+            {/* map */}
             <div style={{ height: '400px', width: '100%', marginTop: '20px', position: 'relative' }}>
               <MapContainer
                 center={[itemData.location.geolocation.latitude, itemData.location.geolocation.longitude]}
@@ -452,13 +497,21 @@ function AddItemPage() {
                     Longitude: {itemData.location.geolocation.longitude.toFixed(4)}
                   </Popup>
                 </Marker>
+
                 <LocationSelector setItemData={setItemData} />
                 <MoveToCurrentLocation setItemData={setItemData} />
+
+                {/* Add this line */}
+                <MapCenterUpdater position={itemData.location.geolocation} />
               </MapContainer>
+
             </div>
+
             <Button variant="contained" color="primary" type="submit">
               Add Item
             </Button>
+
+
           </form>
         </div>
       </div>
