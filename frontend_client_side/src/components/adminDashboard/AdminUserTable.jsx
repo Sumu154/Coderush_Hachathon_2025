@@ -87,7 +87,7 @@ const AdminUserTable = () => {
                   <td> <img className='h-10 w-10 rounded-full' src={user_image} alt="" /> </td>
                   <td> {user_name} </td>
                   <td> {user_email} </td>
-                  <td> <button onClick={() => handleMakeAdmin(user_email, user_name)} className={`min-w-[112px] font-medium px-3 lg:px-4 py-1 rounded-sm  ${ user_role === 'admin' ? 'bg-ash cursor-not-allowed' : '' }`} disabled={it.user_role === "admin"} > Make admin </button> </td>
+                  <td> <button className={`min-w-[112px] font-medium px-3 lg:px-4 py-1 rounded-sm  ${ user_role === 'admin' ? 'bg-ash cursor-not-allowed' : '' }`} disabled={it.user_role === "admin"} > View user </button> </td>
                 </tr>
               )
             })}

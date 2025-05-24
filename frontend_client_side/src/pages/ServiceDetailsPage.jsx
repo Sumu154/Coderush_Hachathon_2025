@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getServiceById } from '../apis/serviceApi';
 import axiosInstance from '../config/axiosInstance';
 import {
@@ -205,9 +205,9 @@ const ServiceDetailsPage = () => {
                 <Divider sx={{ my: 2 }} />
 
                 <Box sx={{ display: 'flex', gap: 2, mt: 3 }}>
-                    <Button variant="contained" sx={{ bgcolor: 'red', '&:hover': { bgcolor: 'darkred' } }}>
-                        Pay
-                    </Button>
+                    <Link to={`/services/${id}/payment`}> <Button variant="contained" sx={{ bgcolor: 'red', '&:hover': { bgcolor: 'darkred' } }}>
+                        Purchase
+                    </Button> </Link>
                     <Button onClick={handleSendMessage} variant="contained" sx={{ bgcolor: 'blue', '&:hover': { bgcolor: 'darkblue' } }}>
                         Send Message
                     </Button>
