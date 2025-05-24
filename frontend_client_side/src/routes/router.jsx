@@ -1,42 +1,27 @@
 import { createBrowserRouter } from "react-router-dom";
 
-
 import PrivateRoute from "./PrivateRoutes";
 
-
-// layout import
+// layout imports
 import MainLayout from "../layouts/MainLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import DashboardLayout from "../layouts/DashboardLayout";
 
-
-
-// pages import
+// page imports
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import HomePage from "../pages/HomePage";
-<<<<<<< Updated upstream
 import AddItemPage from "../pages/AddItemPage";
-=======
 import ProfilePage from "../pages/ProfilePage";
->>>>>>> Stashed changes
-
-
-
-
-
-
-
-
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout></MainLayout>,
+    element: <MainLayout />,
     children: [
       {
         path: "/",
-        element: <HomePage></HomePage>
+        element: <HomePage />
       },
       {
         path: "/add-item",
@@ -46,34 +31,32 @@ const router = createBrowserRouter([
   },
   {
     path: "/auth",
-    element: <AuthLayout></AuthLayout>,
+    element: <AuthLayout />,
     children: [
       {
         path: '/auth/login',
-        element: <LoginPage></LoginPage>
+        element: <LoginPage />
       },
       {
         path: '/auth/register',
-        element: <RegisterPage></RegisterPage>
+        element: <RegisterPage />
       }
     ]
   },
   {
     path: "/dashboard",
-    element: <PrivateRoute> <DashboardLayout></DashboardLayout> </PrivateRoute>,
+    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
     children: [
       {
-        path: "/dashboard", 
-        element: <PrivateRoute> <ProfilePage></ProfilePage> </PrivateRoute>
-      },
-      // for student
-      
-      
+        path: "/dashboard",
+        element: <ProfilePage />
+      }
     ]
   },
+  // Uncomment this for 404 page support
   // {
   //   path: '*',
-  //   element: <Error></Error>
+  //   element: <ErrorPage />
   // },
 ]);
 
