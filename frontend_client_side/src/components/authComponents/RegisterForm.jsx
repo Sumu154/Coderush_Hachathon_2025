@@ -10,13 +10,21 @@ import { createToken } from '../../apis/authApi';
 
 // utils import
 import { validPassword } from '../../Utils/Validators/passValidator'
+import axiosInstance from '../../config/axiosInstance';
 
 
+<<<<<<< Updated upstream
 const image_hosting_key = import.meta.env.VITE_Image_Upload_token;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 
 
 
+=======
+// image hosting key
+const image_hosting_key = import.meta.env.VITE_Image_Upload_token;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
+
+>>>>>>> Stashed changes
 
 const RegisterForm = () => {
   const navigate = useNavigate();
@@ -36,9 +44,10 @@ const RegisterForm = () => {
     const form = new FormData(e.target);
     const user_name = form.get('name');
     const user_email = form.get('email');
-    const user_image = form.get('photo');
+    const image = form.get('photo');
     const password = form.get('password');
     const user_role = 'student';
+<<<<<<< Updated upstream
     const course_enrollment = 0;
 
     const imageFile = {image : data.image[0]}
@@ -50,6 +59,25 @@ const RegisterForm = () => {
 
     const user = { user_name, user_email, user_image, password, user_role, course_enrollment };
     //console.log(user);
+=======
+
+    const imageFormData = new FormData();
+    imageFormData.append('image', image);
+
+    
+
+    // console.log(image_hosting_api)
+    const res = await axiosInstance.post(image_hosting_api, imageFormData, {
+        headers: {
+            "content-type": "multipart/form-data",
+          }
+    })
+    const user_image = res.data?.data?.url;
+    console.log('image url:', user_image)
+
+    const user = { user_name, user_email, user_image: user_image, password, user_role,  };
+    console.log(user);
+>>>>>>> Stashed changes
 
     const passError = validPassword(password);
     if (passError) {
@@ -129,11 +157,11 @@ const RegisterForm = () => {
         </fieldset>
         <fieldset className="form-control mb-3">
           <label className="label mb-1"> <span className="label-text">  Avater </span> </label>
-          {/* <input name='photo' type="text" placeholder="photo url" className="input w-full"/> */}
-          <br />
-          <input type="file"
+          <input name='photo' type="file"  accept="image/*" placeholder="photo url" className="input w-full"/>
+          {/* <br />
+          <input type="file" name='photo'
             required
-            className="file-input w-full" />
+            className="file-input w-full" /> */}
         </fieldset>
         <fieldset className="form-control mb-3">
           <label className="label mb-1"> <span className="label-text">Email</span> </label>
