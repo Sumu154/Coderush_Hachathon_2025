@@ -13,6 +13,9 @@ import RegisterPage from "../pages/RegisterPage";
 import HomePage from "../pages/HomePage";
 import AddItemPage from "../pages/AddItemPage";
 import ProfilePage from "../pages/ProfilePage";
+import Services from "../pages/Services";
+import AddServiceForm from "../components/servicesComponents/AddServiceForm";
+import AddServicePage from "../pages/AddServicePage";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +25,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />
+      },
+      {
+        path: "/services",
+        element: <Services></Services>
+      },
+      {
+        path: "/addServices",
+        element: <AddServicePage></AddServicePage>
       },
       {
         path: "/add-item",
