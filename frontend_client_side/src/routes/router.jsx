@@ -18,6 +18,7 @@ import AddServiceForm from "../components/servicesComponents/AddServiceForm";
 import AddServicePage from "../pages/AddServicePage";
 import ServicePaymentPage from "../pages/ServicePaymentPage";
 import ServicePage from "../pages/ServicePage";
+import MessagesPage from "../pages/MessagesPage";
 
 
 
@@ -35,13 +36,17 @@ const router = createBrowserRouter([
         element: <Services></Services>
       },
       {
+        path: "/chat",
+        element: <MessagesPage></MessagesPage>
+      },
+      {
         path: "/addServices",
         element: <AddServicePage></AddServicePage>
       },
       {
         path: "/services/:id/payment",
         element: <PrivateRoute> <ServicePaymentPage></ServicePaymentPage>  </PrivateRoute>,
-        loader: ({params}) => {
+        loader: ({ params }) => {
           return params.id;
         }
       },
