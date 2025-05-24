@@ -26,24 +26,24 @@ const RegisterForm = () => {
     e.preventDefault();
 
     // get the form data
-    const form = new FormData(e.target);   
+    const form = new FormData(e.target);
     const user_name = form.get('name');
     const user_email = form.get('email');
     const user_image = form.get('photo');
     const password = form.get('password');
     const user_role = 'student';
     const course_enrollment = 0;
-    const user = {user_name, user_email, user_image, password, user_role, course_enrollment};
+    const user = { user_name, user_email, user_image, password, user_role, course_enrollment };
     //console.log(user);
 
     const passError = validPassword(password);
-    if(passError){
+    if (passError) {
       setError(passError);
       return;
     }
 
-    
-    try{
+
+    try {
       // register -> firebase
       const res1 = await createNewUser(user_email, password);
       console.log(res1.user);
@@ -70,7 +70,7 @@ const RegisterForm = () => {
       const res3 = await createUser(user);
       console.log(res3);
     }
-    catch(e){
+    catch (e) {
       const errorCode = e.code;
       const errorMessage = e.message;
       // //console.log(errorCode, errorMessage);
@@ -83,12 +83,12 @@ const RegisterForm = () => {
   }
 
 
-  const handleGoogleSignIn = async() => {
-    try{
+  const handleGoogleSignIn = async () => {
+    try {
       const res = await signInWithGoogle();
       navigate('/')
     }
-    catch(e){
+    catch (e) {
       //console.log('ERROR', e.message)
     }
 
@@ -97,7 +97,7 @@ const RegisterForm = () => {
 
   // handle Toggle Eye for password
   const togglePasswordType = () => {
-    passwordType==='password' ? setPasswordType('text') : setPasswordType('password');
+    passwordType === 'password' ? setPasswordType('text') : setPasswordType('password');
   }
 
 
@@ -113,8 +113,12 @@ const RegisterForm = () => {
           <input name='name' type="text" placeholder="name" className="input w-full" required />
         </fieldset>
         <fieldset className="form-control mb-3">
-          <label className="label mb-1"> <span className="label-text"> Your Photo URL </span> </label>
-          <input name='photo' type="text" placeholder="photo url" className="input w-full" required />
+          <label className="label mb-1"> <span className="label-text">  Avater </span> </label>
+          {/* <input name='photo' type="text" placeholder="photo url" className="input w-full"/> */}
+          <br />
+          <input type="file"
+            required
+            className="file-input w-full" />
         </fieldset>
         <fieldset className="form-control mb-3">
           <label className="label mb-1"> <span className="label-text">Email</span> </label>
@@ -124,7 +128,7 @@ const RegisterForm = () => {
           <label className="label mb-1"> <span className="label-text">Password</span> </label>
           <div className='relative'>
             <input name='password' type={passwordType} placeholder="password" className="input  w-full" required />
-            <span onClick={togglePasswordType} className='absolute right-3 top-3 cursor-pointer'> {passwordType==='password' ? <PiEye />  : <PiEyeClosed /> }  </span>
+            <span onClick={togglePasswordType} className='absolute right-3 top-3 cursor-pointer'> {passwordType === 'password' ? <PiEye /> : <PiEyeClosed />}  </span>
           </div>
         </fieldset>
 
@@ -137,7 +141,7 @@ const RegisterForm = () => {
         </div>
 
         {/* alter */}
-        <p className='text-center text-sm mt-3'> Already have an account? <span  className='text-red-600 ml-1'> <Link to='/auth/login'> Sign In </Link> </span> </p>
+        <p className='text-center text-sm mt-3'> Already have an account? <span className='text-red-600 ml-1'> <Link to='/auth/login'> Sign In </Link> </span> </p>
       </form>
     </div>
   );
