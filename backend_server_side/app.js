@@ -27,6 +27,20 @@ app.use(cookieParser());
 const port = process.env.PORT || 3000;
 
 
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+
+const io = new Server(server, {
+  cors: {
+      origin: "http://localhost:3000",
+      methods: ["GET", "POST"],
+      credentials: true
+  }
+});
+
+
+
 // import all the routes
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
@@ -40,6 +54,7 @@ app.use('/api', authRoutes)
 app.use('/api', serviceRoutes)
 app.use('/api', paymentRoutes)
 app.use('/api', feedbackRoutes)
+app.use('/api/messages', messageRoutes);
 
 // app.use('/api/messages', messageRoutes);
 
@@ -47,6 +62,18 @@ app.use('/api', feedbackRoutes)
 app.get('/', (req, res) => {
   res.send('hackathon 2025')
 })
+
+// Socket.IO connection handler
+io.on('connection', (socket) => {
+  console.log('New client connected:', socket.id);
+
+  // Setup socket handlers from controller
+  chatController.setupSocket(socket, io);
+
+  socket.on('disconnect', () => {
+      console.log('Client disconnected:', socket.id);
+  });
+});
 
 app.listen(port, () => {
   console.log(`server is running at port ${port} `)

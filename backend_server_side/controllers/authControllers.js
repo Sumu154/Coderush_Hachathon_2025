@@ -39,4 +39,20 @@ const getToken = (req, res) => {
   }
 }
 
-module.exports = { createToken, clearToken, getToken };
+const get_session = async (req, res) => {
+  try {
+      const token = req.cookies.token; // Get the token from cookies
+      if (!token) {
+          return res.status(401).json({ message: 'Not authenticated' });
+      }
+
+      // Verify the token
+      const decoded = jwt.verify(token, JWT_SECRET);
+      res.status(200).json({ userEmail : decoded.user_email});
+  } catch (error) {
+      console.error('Error in get_session:', error);
+      res.status(403).json({ message: 'Invalid or expired token' });
+  }
+};
+
+module.exports = { createToken, clearToken, getToken, get_session };
