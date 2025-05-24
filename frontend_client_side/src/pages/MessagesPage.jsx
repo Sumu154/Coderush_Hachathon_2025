@@ -291,7 +291,7 @@ const MessagesPage = () => {
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api//session`, {
+        const response = await fetch(`http://localhost:3000/api/session`, {
           credentials: 'include'
         });
 
@@ -300,6 +300,7 @@ const MessagesPage = () => {
         }
 
         const data = await response.json();
+        console.log("Current user data:", data);
         setCurrentUsername(data.userEmail);
       } catch (error) {
         console.error('Error fetching current user:', error);

@@ -42,12 +42,13 @@ const getToken = (req, res) => {
 const get_session = async (req, res) => {
   try {
       const token = req.cookies.token; // Get the token from cookies
+      console.log(token)
       if (!token) {
           return res.status(401).json({ message: 'Not authenticated' });
       }
 
       // Verify the token
-      const decoded = jwt.verify(token, JWT_SECRET);
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
       res.status(200).json({ userEmail : decoded.user_email});
   } catch (error) {
       console.error('Error in get_session:', error);
