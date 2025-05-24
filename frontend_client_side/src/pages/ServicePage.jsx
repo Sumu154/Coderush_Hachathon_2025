@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, CircularProgress, Alert, TextField, InputAdornment, IconButton, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import { Box, Typography, CircularProgress, Alert, TextField, InputAdornment, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
-import ServiceList from './ServiceList';
 //import AppNavbar from '../components/Navbar';
 import { useLocation } from 'react-router-dom';
-//import './ServicePage.css'; // Assuming you have a CSS file for styles
-import '../css/ServicePage.css';
+import '../components/css/ServicePage.css';
+import ServiceList from '../components/allCards/ServiceList';
 
 const ServicePage = () => {
     const location = useLocation();
@@ -19,15 +18,14 @@ const ServicePage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [searchQuery, setSearchQuery] = useState(keywordParam || '');
-    const [sortOption, setSortOption] = useState('default');
 
     useEffect(() => {
         fetchServices();
     }, []);
 
     useEffect(() => {
-        applyFiltersAndSort();
-    }, [services, searchQuery, categoryParam, sortOption]);
+        applyFilters();
+    }, [services, searchQuery, categoryParam]);
 
     useEffect(() => {
         setSearchQuery(keywordParam || '');
@@ -53,7 +51,7 @@ const ServicePage = () => {
         }
     };
 
-    const applyFiltersAndSort = () => {
+    const applyFilters = () => {
         let filtered = [...services];
 
         if (searchQuery.trim() !== '') {
@@ -70,29 +68,7 @@ const ServicePage = () => {
             );
         }
 
-        // Sorting
-        switch (sortOption) {
-            case 'name_asc':
-                filtered.sort((a, b) => a.service_title.localeCompare(b.service_title));
-                break;
-            case 'name_desc':
-                filtered.sort((a, b) => b.service_title.localeCompare(a.service_title));
-                break;
-            case 'price_asc':
-                filtered.sort((a, b) => Number(a.service_price) - Number(b.service_price));
-                break;
-            case 'price_desc':
-                filtered.sort((a, b) => Number(b.service_price) - Number(a.service_price));
-                break;
-            default:
-                break;
-        }
-
         setFilteredServices(filtered);
-    };
-
-    const handleSortChange = (event) => {
-        setSortOption(event.target.value);
     };
 
     const handleSearchChange = (e) => {
@@ -106,20 +82,17 @@ const ServicePage = () => {
     return (
         <>
             
-            <Box className="content service-content" display="flex" justifyContent="center" alignItems="center" flexDirection="column" mb={6}>
+            <Box className="content item-content" display="flex" justifyContent="center" alignItems="center" flexDirection="column" mb={6}>
                 <Typography variant="h4" component="h1" className="page-title" mb={6}>
                     Services for Sale
                 </Typography>
 
-                {/* Search Bar and Sort */}
+                {/* Search Bar */}
                 <Box sx={{
                     width: '80%',
                     maxWidth: '50rem',
                     mb: 3,
-                    mx: 'auto',
-                    display: 'flex',
-                    flexDirection: { xs: 'column', sm: 'row' },
-                    gap: 2
+                    mx: 'auto'
                 }}>
                     <TextField
                         fullWidth
@@ -149,21 +122,6 @@ const ServicePage = () => {
                             }
                         }}
                     />
-                    <FormControl sx={{ minWidth: 180 }}>
-                        <InputLabel id="sort-label">Sort By</InputLabel>
-                        <Select
-                            labelId="sort-label"
-                            value={sortOption}
-                            label="Sort By"
-                            onChange={handleSortChange}
-                        >
-                            <MenuItem value="default">Newest First</MenuItem>
-                            <MenuItem value="name_asc">Name (A-Z)</MenuItem>
-                            <MenuItem value="name_desc">Name (Z-A)</MenuItem>
-                            <MenuItem value="price_asc">Price (Low to High)</MenuItem>
-                            <MenuItem value="price_desc">Price (High to Low)</MenuItem>
-                        </Select>
-                    </FormControl>
                 </Box>
 
                 <Box className="main-container" width="100%" maxWidth="1200px" mb={4}>
@@ -176,9 +134,7 @@ const ServicePage = () => {
                             {error}
                         </Alert>
                     ) : (
-                        <ServiceList
-                            services={filteredServices}
-                        />
+                        <ServiceList services={filteredServices} />
                     )}
                 </Box>
             </Box>
