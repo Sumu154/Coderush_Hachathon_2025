@@ -3,7 +3,7 @@ import '../../assets/stylesheets/banner.css'
 import React, { useState } from 'react';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Thumbs } from "swiper/modules";
+import { Navigation, Thumbs, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
@@ -25,7 +25,16 @@ const HomeBanner = () => {
     <div className='relative w-full'>
       {/* main carousel */}
       <div className=' '>
-        <Swiper className='' modules={[Navigation, Thumbs]}  navigation={true}  slidesPerView={1} onSwiper={setMainSwiper} onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)} >
+        <Swiper className='' 
+        modules={[Navigation, Thumbs, Autoplay]}  
+        navigation={true}  
+        slidesPerView={1} 
+        autoplay={{
+          delay: 2000, // ✅ 3 seconds delay
+          disableOnInteraction: false, // ✅ keeps autoplay after user interacts
+        }}
+        onSwiper={setMainSwiper} 
+        onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)} >
           {/* images gula ekta ekta kore map kore dekhabo */}
           {images.map((it, index) => {
             return (

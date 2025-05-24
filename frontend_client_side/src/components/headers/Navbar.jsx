@@ -1,5 +1,5 @@
 import '../../assets/stylesheets/navbar.css'
-import logo from '../../assets/logos/educair.png'
+import logo from '../../assets/logos/iut-logo.jfif'
 
 import React, { useContext } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
