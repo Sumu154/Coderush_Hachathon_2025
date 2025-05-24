@@ -20,6 +20,7 @@ import ServicePage from "../pages/ServicePage";
 import MessagesPage from "../pages/MessagesPage";
 import FeedbackPage from "../pages/FeedbackPage";
 import ServiceDetailsPage from "../pages/ServiceDetailsPage";
+import UsersPage from "../pages/UsersPage";
 
 
 
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/feedbacks",
         element: <PrivateRoute> <FeedbackPage></FeedbackPage> </PrivateRoute>
+      },
+      {
+        path: "/dashboard/users",
+        element: <PrivateRoute> <UsersPage></UsersPage> </PrivateRoute>
       }
     ]
   },

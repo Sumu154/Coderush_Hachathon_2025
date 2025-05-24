@@ -57,7 +57,7 @@ const Navbar = () => {
             </div>
             <div className='flex gap-2 items-center'>
               <img className='w-7 h-7 rounded-full' src={logo} alt="" />
-              <p className='font-JotiOne text-white text-xl lg:text-2xl'> EduCair </p>
+              <p className='font-JotiOne text-white text-xl lg:text-2xl'> CampusMart </p>
             </div>
           </div>
           <div className="navbar-center hidden lg:flex">

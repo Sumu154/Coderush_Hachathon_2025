@@ -39,7 +39,7 @@ const ServiceCard = ({ service }) => {
                     transform: 'translateY(-6px) scale(1.01)',
                     boxShadow: '0 8px 32px rgba(45, 79, 143, 0.16)',
                 },
-                background: 'linear-gradient(90deg, #e7efd8 60%, #dcecc5 100%)'  // pastel version of #556b2f
+                background: 'white'  // pastel version of #556b2f
                 }}
             >
                 <Grid container sx={{ height: '100%' }}>
@@ -56,7 +56,7 @@ const ServiceCard = ({ service }) => {
                             <CardMedia
                                 component="img"
                                 sx={{
-                                    width: '280px',        // ✅ fixed width
+                                    width: '285px',        // ✅ fixed width
                                     height: '220px',       // ✅ fixed height     
                                     objectFit: 'cover',
                                     objectPosition: 'center',

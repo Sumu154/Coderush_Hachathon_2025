@@ -41,14 +41,15 @@ const Sidebar =  () => {
   const studentLinks = <>
     <li> <NavLink to="/dashboard"> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <CgProfile  className='text-lg' /> <span> Profile </span> </div> </NavLink> </li>
     <li> <NavLink to="/dashboard/message" className={({ isActive }) => isActive ? "font-semibold" : ""}> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <MdClass  className='text-xl' /> <span> Message </span> </div> </NavLink> </li>
-    {/* <li> <NavLink to="/dashboard/studentAssignments" className={({ isActive }) => isActive ? "font-semibold" : ""}> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <MdOutlineAssignment className='text-xl'  /> <span> Assignments </span> </div> </NavLink> </li>
-    <li> <NavLink to="/dashboard/studentOrders" className={({ isActive }) => isActive ? "font-semibold" : ""}> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <BiSolidPurchaseTag className='text-xl'  /> <span> Orders </span> </div> </NavLink> </li> */}
+    {/* <li> <NavLink to="/dashboard/studentAssignments" className={({ isActive }) => isActive ? "font-semibold" : ""}> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <MdOutlineAssignment className='text-xl'  /> <span> Assignments </span> </div> </NavLink> </li> */}
+    {/* <li> <NavLink to="/dashboard/studentOrders" className={({ isActive }) => isActive ? "font-semibold" : ""}> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <BiSolidPurchaseTag className='text-xl'  /> <span> Orders </span> </div> </NavLink> </li>  */}
   </>
 
   const adminLinks = <>
   <li> <NavLink to="/dashboard" > <div className='flex gap-2 items-center text-[17px] mb-2 hover:font-semibold'> <CgProfile className='text-lg' /> <span> Profile </span> </div> </NavLink> </li>
   <li> <NavLink to="/dashboard/message" className={({ isActive }) => isActive ? "font-semibold" : ""}> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <MdClass  className='text-xl' /> <span> Message </span> </div> </NavLink> </li>
   <li> <NavLink to="/dashboard/feedbacks" className={({ isActive }) => isActive ? "font-semibold" : ""}> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <MdFeedback className='text-xl'/> <span> View feedbacks </span> </div> </NavLink> </li>
+  <li> <NavLink to="/dashboard/users" className={({ isActive }) => isActive ? "font-semibold" : ""}> <div className='flex gap-2 items-center  lg:text-[17px] mb-2 hover:font-semibold'> <HiUsers className='text-xl'/> <span> View users </span> </div> </NavLink> </li>
   </>
 
   // const teacherLinks = <>
