@@ -12,3 +12,10 @@ export const getServices = async () => {
   const res = await axiosInstance.get('/services');
   return res.data;
 }
+
+// get service_price
+export const getServicePrice = async (service_id) => {
+  const res = await axiosInstance.get(`/services/${service_id}/service_price`);
+  console.log('called')
+  return res.data;
+}

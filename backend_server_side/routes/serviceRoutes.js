@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { 
   createService,
-  getServices
+  getServices,
+  getServicePrice
 } = require('../controllers/serviceControllers');
 
 
@@ -10,5 +11,7 @@ const {
 router.post('/services', createService);
 // show all users -> get
 router.get('/services', getServices);
+// get service_price 
+router.get('/services/:service_id/service_price', getServicePrice)
 
 module.exports = router;

@@ -12,7 +12,8 @@ import { toast } from 'react-toastify';
 // import { getTeacherName, updateUserEnrollment } from '../../apis/courseApi';
 
 
-const PaymentForm = ( { course_id, course_price } ) => {
+const PaymentForm = ( { service_id, service_price } ) => {
+  // console.log(service_id, service_price)
   const { user } = useContext(AuthContext);
   const user_email = user.email;
 
@@ -45,10 +46,10 @@ const PaymentForm = ( { course_id, course_price } ) => {
 
     try{
       // 1) clientSecret key ta generate 
-      const data = await getPaymentIntent(course_price);
+      const data = await getPaymentIntent(service_price);
       const clientSecret = data.client_secret;
       const transactionId = data.transaction_id;
-      //console.log(clientSecret, transactionId);
+      console.log(clientSecret, transactionId);
     
 
       
@@ -70,33 +71,6 @@ const PaymentForm = ( { course_id, course_price } ) => {
       else{
         //console.log("Payment Method:", paymentIntent.payment_method);
         setError(null);
-
-        const enrollment = { user_email, course_id, order_transaction_id:transactionId  };
-
-        // database e store on database
-        try{
-          // enrollment database e store -> kon user kon kon course enroll korce + oi courser transaction_id
-          const res = await createEnrollment(enrollment);
-          //console.log(res.data);
-        }
-        catch(e){
-          // //console.log('e', e.status);
-          if(e.response.status === 400){
-            toast.error('You have already enrolled this course!', {
-              position: "top-center",
-              autoClose: 1000,
-              theme: "dark",
-            });
-          }
-          setProcessing(false);
-          return;
-        }
-
-        // payment successful hole ja korbo
-        setSuccess(true);
-          //  enrollement count 1 barate hbe
-        const data = await updateUserEnrollment(course_id);
-        console.log(data);
         
         Swal.fire({
           title: "Thank You! Payment Completed.",
@@ -121,7 +95,7 @@ const PaymentForm = ( { course_id, course_price } ) => {
 
         <div className=' w-full '>
           { processing ? <Lottie animationData={processingL} loop={true} > </Lottie> 
-          : <button type='submit' className='w-full flex gap-2 justify-center items-center text-white bg-purple hover:bg-purple/90 font-medium mt-8 py-[6px] rounded-[2px] '> <span className='mb-[2px] '> Pay now </span> <MdOutlinePayment className='text-2xl ' /> </button> }
+          : <button type='submit' className='w-full flex gap-2 justify-center items-center text-white bg-pastle hover:bg-pastle/90 font-medium mt-8 py-[6px] rounded-[2px] '> <span className='mb-[2px] '> Pay now </span> <MdOutlinePayment className='text-2xl ' /> </button> }
           </div> 
       </form>
 

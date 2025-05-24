@@ -27,7 +27,20 @@ const getServices = async (req, res) => {
 }
 
 
+const getServicePrice = async (req, res) => {
+  try{
+    const { service_id } = req.params;
+    const service = await serviceModel.findOne( {_id: service_id} );
+    res.status(200).json(service.service_price);
+  }
+  catch(e){
+    res.status(500).json({ message: 'Internal server error: ', error:e.message });
+  }
+}
+
+
 module.exports = { 
   createService,
-  getServices
+  getServices,
+  getServicePrice
 };
