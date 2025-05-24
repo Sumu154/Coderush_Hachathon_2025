@@ -39,7 +39,7 @@ const Navbar = () => {
 
   const links = <>
     <li> <NavLink to="/"> Home </NavLink> </li>
-    <li> <NavLink to="/servicePage"> Services </NavLink> </li>
+    <li> <NavLink to="/services"> Services </NavLink> </li>
     <li> <NavLink to="/addServices"> Add services </NavLink> </li>
   </>
 

@@ -13,7 +13,6 @@ import RegisterPage from "../pages/RegisterPage";
 import HomePage from "../pages/HomePage";
 import AddItemPage from "../pages/AddItemPage";
 import ProfilePage from "../pages/ProfilePage";
-import Services from "../pages/Services";
 import AddServiceForm from "../components/servicesComponents/AddServiceForm";
 import AddServicePage from "../pages/AddServicePage";
 import ServicePaymentPage from "../pages/ServicePaymentPage";
@@ -35,7 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/services",
-        element: <Services></Services>
+        element: <ServicePage />
       },
       {
         path: "/chat",
@@ -56,10 +55,10 @@ const router = createBrowserRouter([
         path: "/add-item",
         element: <AddItemPage />
       },
-      {
-        path: "/servicePage",
-        element: <ServicePage />
-      },
+      // {
+      //   path: "/servicePage",
+      //   element: 
+      // },
       {
         path: "/services/:id",
         element: <ServiceDetailsPage />

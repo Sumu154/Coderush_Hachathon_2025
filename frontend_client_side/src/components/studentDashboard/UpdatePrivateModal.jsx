@@ -60,6 +60,16 @@ const UpdatePrivateModal = ({ modalOpen, setModalOpen }) => {
 
         <form onSubmit={handleUpdateAcademicInfo}>
           <div className="mb-4">
+            <label className="block mb-1 text-sm font-medium">Phone:</label>
+            <input
+              type="text"
+              name="user_phone"
+              className="input w-full"
+              required
+            />
+          </div>
+          
+          <div className="mb-4 w-full">
             <label className="block mb-1 text-sm font-medium">Date of Birth:</label>
             <DatePicker
               selected={dob}
@@ -71,16 +81,6 @@ const UpdatePrivateModal = ({ modalOpen, setModalOpen }) => {
               showMonthDropdown
               showYearDropdown
               dropdownMode="select"
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block mb-1 text-sm font-medium">Phone:</label>
-            <input
-              type="text"
-              name="user_phone"
-              className="input w-full"
               required
             />
           </div>

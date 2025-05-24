@@ -150,10 +150,8 @@ const ServicePage = () => {
     return (
         <>
             
-            <Box className="content item-content" display="flex" justifyContent="center" alignItems="center" flexDirection="column" mb={6}>
-                <Typography variant="h4" component="h1" className="page-title" mb={6}>
-                    Services for Sale
-                </Typography>
+           <div className='mt-24'>
+             <Box className="content item-content" display="flex" justifyContent="center" alignItems="center" flexDirection="column" mb={6}>
 
                 {/* Search Bar */}
                 <Box sx={{
@@ -171,7 +169,7 @@ const ServicePage = () => {
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    <SearchIcon sx={{ color: '#2d4f8f' }} />
+                                    <SearchIcon sx={{ color: '#556b2f' }} />
                                 </InputAdornment>
                             ),
                             endAdornment: searchQuery && (
@@ -185,15 +183,17 @@ const ServicePage = () => {
                         sx={{
                             '& .MuiOutlinedInput-root': {
                                 '&.Mui-focused fieldset': {
-                                    borderColor: '#2d4f8f',
+                                    borderColor: '#556b2f',
                                 }
                             }
                         }}
                     />
                 </Box>
 
+                {/* main services showing */}
                 <Box className="main-container" width="100%" maxWidth="1200px" mb={4}>
                     <ServiceFilters
+                        className=''
                         filters={filters}
                         onFilterChange={handleFilterChange}
                         sortOption={sortOption}
@@ -202,7 +202,7 @@ const ServicePage = () => {
 
                     {loading ? (
                         <Box className="loading-container" mb={4}>
-                            <CircularProgress style={{ color: '#2d4f8f' }} />
+                            <CircularProgress style={{ color: '#556b2f' }} />
                         </Box>
                     ) : error ? (
                         <Alert severity="error" className="error-alert" mb={4}>
@@ -215,6 +215,7 @@ const ServicePage = () => {
                     )}
                 </Box>
             </Box>
+           </div>
         </>
     );
 };

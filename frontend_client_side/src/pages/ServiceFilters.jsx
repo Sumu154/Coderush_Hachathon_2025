@@ -39,9 +39,10 @@ const ServiceFilters = ({ filters, onFilterChange, sortOption, onSortChange }) =
     };
 
     return (
-        <Paper className="filter-section" sx={{ p: 2 }}>
-            <Typography variant="h6" component="h2" className="filter-title" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <TuneIcon /> Filters
+        <div className=' w-[25%] '>
+            <Paper className="filter-section" sx={{ p: 2 }}>
+            <Typography variant="h6" component="h2"  sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <span className='text-pastle'> <TuneIcon /> Filters </span>
             </Typography>
             <Divider sx={{ my: 2 }} />
 
@@ -142,8 +143,8 @@ const ServiceFilters = ({ filters, onFilterChange, sortOption, onSortChange }) =
                 onClick={handleClearFilters}
                 sx={{
                     mt: 2,
-                    color: '#2d4f8f',
-                    borderColor: '#2d4f8f',
+                    color: '#556b2f',
+                    borderColor: '#556b2f',
                     '&:hover': {
                         borderColor: '#1e3a6a'
                     }
@@ -152,6 +153,7 @@ const ServiceFilters = ({ filters, onFilterChange, sortOption, onSortChange }) =
                 Clear Filters
             </Button>
         </Paper>
+        </div>
     );
 };
 

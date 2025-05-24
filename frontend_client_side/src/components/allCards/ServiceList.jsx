@@ -14,15 +14,17 @@ const ServiceList = ({ services }) => {
     }
 
     return (
-        <Box className="listings-section">
-            <Grid container spacing={1}>
-                {services.map((service) => (
-                    <Grid item xs={12} key={service._id}>
-                        <ServiceCard service={service} />
-                    </Grid>
-                ))}
-            </Grid>
-        </Box>
+        <div className='w-[75%] '>
+            <Box className="listings-section w-full ">
+                <Grid className='w-full ' container spacing={1}>
+                    {services.map((service) => (
+                        <Grid className=' w-full' item key={service._id}>
+                            <ServiceCard service={service} />
+                        </Grid>
+                    ))}
+                </Grid>
+            </Box>
+        </div>
     );
 };
 
