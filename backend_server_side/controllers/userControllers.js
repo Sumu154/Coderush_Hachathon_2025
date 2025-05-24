@@ -125,6 +125,58 @@ const updateUserRoleAdmin = async (req, res) => {
 }
 
 
+// update academic info
+// PUT /api/users/academic/:user_email
+const updateAcademicInfo = async (req, res) => {
+  try {
+    const user_email = req.params.user_email;
+    console.log(req.body)
+    const { user_uni, user_dep, user_prog, user_year } = req.body.academic_info;
+
+    const user = await userModel.findOne({ user_email });
+    if(!user){
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.user_uni = user_uni;
+    user.user_dep = user_dep;
+    user.user_prog = user_prog;
+    user.user_year = user_year;
+
+    await user.save();
+
+    res.status(200).json({ message: "Academic info updated", user });
+  } 
+  catch (e) {
+    res.status(500).json({ message: 'Internal server error', error: e.message });
+  }
+};
+
+
+const updatePrivateInfo = async (req, res) => {
+  try {
+    const user_email = req.params.user_email;
+    console.log(req.body)
+    const { user_dob, user_phone } = req.body.private_info;
+
+    const user = await userModel.findOne({ user_email });
+    if(!user){
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.user_dob = user_dob;
+    user.user_phone = user_phone;
+    await user.save();
+
+    res.status(200).json({ message: "Academic info updated", user });
+  } 
+  catch (e) {
+    res.status(500).json({ message: 'Internal server error', error: e.message });
+  }
+};
+
+
+
 
 // total user
 const getTotalUsers = async (req, res) => {
@@ -146,5 +198,7 @@ module.exports = {
   getUserRole, 
   getUserImage,
   updateUserRoleAdmin,
+  updateAcademicInfo,
+  updatePrivateInfo,
   getTotalUsers
 };

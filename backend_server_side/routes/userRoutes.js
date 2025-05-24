@@ -9,6 +9,8 @@ const {
   updateUserRoleAdmin, 
   getUserRole,
   getUserImage,
+  updateAcademicInfo,
+  updatePrivateInfo,
   getTotalUsers
 } = require('../controllers/userControllers');
 
@@ -30,6 +32,11 @@ router.get('/users/:user_id', getUserById);
 router.get('/users/:user_email/user_role', getUserRole)
 // get user image
 router.get('/users/:user_email/user_image', getUserImage);
+// update academic info
+router.put('/users/:user_email/academic_info', updateAcademicInfo)
+// update academic info
+router.put('/users/:user_email/private_info', updatePrivateInfo)
+
 // get user role
 router.patch('/users/:user_email/user_role', updateUserRoleAdmin)
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 
@@ -9,34 +9,44 @@ import { SlCalender } from "react-icons/sl";
 
 import { MdOutlineUpdate } from 'react-icons/md';
 import UpdateAcadmeicModal from './UpdateAcadmeicModal';
+import { getUserByEmail } from '../../apis/userApi';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 
 const ProfileAcademicInfo = () => {
+  const { user } = useContext(AuthContext);
+  const user_email = user.email;
   const university = 'IUT'
 
+  const [ userp, setUserp ] = useState('')
   const [ modalOpen, setModalOpen ] = useState(false);
 
-  const handleUpdateAcademicInfo = () => {
-
+  const fetchAcademicInfo = async () => {
+    const data = await getUserByEmail(user_email)
+    setUserp(data);
   }
+
+  useEffect(() => {
+    fetchAcademicInfo();
+  }, [])
 
   return (
     <div className='border-[1px] border-dark/10 px-3 py-4 text-dark/80 rounded-sm  '>
       <p className='flex items-center gap-2 mb-1'>
         <FaUniversity className='text-pastle' />
-        <span>University: {university} </span>
+        <span>University: {userp.user_uni} </span>
       </p>
       <p className='flex items-center gap-2 mb-1'>
         <RiBuilding2Fill className='text-pastle' />
-        <span>Department: {university} </span>
+        <span>Department: {userp.user_dep} </span>
       </p>
       <p className='flex items-center gap-2 mb-1'>
         <FaGraduationCap className='text-pastle' />
-        <span>Program: {university} </span>
+        <span>Program: {userp.user_prog} </span>
       </p>
       <p className='flex items-center gap-2 mb-1'>
         <SlCalender className='text-pastle' />
-        <span>Year of Study: {university} </span>
+        <span>Year of Study: {userp.user_year} </span>
       </p>
 
       <Link className='w-[48%] ' >  </Link>

@@ -11,6 +11,7 @@ import { createToken } from '../../apis/authApi';
 // utils import
 import { validPassword } from '../../Utils/Validators/passValidator';
 import axiosInstance from '../../config/axiosInstance';
+import { validEmail } from '../../utils/Validators/emailValidator';
 
 const image_hosting_key = import.meta.env.VITE_Image_Upload_token;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -37,6 +38,11 @@ const RegisterForm = () => {
     const passError = validPassword(password);
     if (passError) {
       setError(passError);
+      return;
+    }
+    const emailError = validEmail(user_email);
+    if (emailError) {
+      setError(emailError);
       return;
     }
 

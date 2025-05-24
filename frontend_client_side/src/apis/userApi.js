@@ -44,6 +44,19 @@ export const updateUserRole = async (user_email, user_role) => {
   return res.data;
 }
 
+export const updateAcademicInfo = async (user_email, academic_info) => {
+  //console.log(user_role, user_email)
+  const res = await axiosInstance.put(`/users/${user_email}/academic_info`, {academic_info})
+  return res.data;
+}
+
+
+export const updatePrivateInfo = async (user_email, private_info) => {
+  //console.log(user_role, user_email)
+  const res = await axiosInstance.put(`/users/${user_email}/private_info`, {private_info})
+  return res.data;
+}
+
 
 // get all the users
 export const getTotalUsers = async () => {
