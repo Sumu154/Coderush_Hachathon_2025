@@ -30,6 +30,7 @@ const port = process.env.PORT || 3000;
 // import all the routes
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
+const feedbackRoutes = require('./routes/feedbackRoutes')
 const serviceRoutes = require('./routes/serviceRoutes')
 const messageRoutes = require('./routes/messageRoutes');
 const paymentRoutes = require('./routes/paymentRoutes')
@@ -38,6 +39,7 @@ app.use('/api', userRoutes)
 app.use('/api', authRoutes)
 app.use('/api', serviceRoutes)
 app.use('/api', paymentRoutes)
+app.use('/api', feedbackRoutes)
 
 // app.use('/api/messages', messageRoutes);
 
