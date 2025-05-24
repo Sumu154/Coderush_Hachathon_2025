@@ -30,7 +30,7 @@
     "react-modern-drawer": "^1.4.0",
     "react-router-dom": "^7.6.0",
     "react-toastify": "^11.0.5",
-    "sweetalert": "^2.1.2",
+
     "sweetalert2": "^11.21.2",
     "swiper": "^11.2.8",
     "tailwindcss": "^4.1.7",

@@ -17,7 +17,7 @@ import Services from "../pages/Services";
 import AddServiceForm from "../components/servicesComponents/AddServiceForm";
 import AddServicePage from "../pages/AddServicePage";
 import ServicePaymentPage from "../pages/ServicePaymentPage";
-
+import ServicePage from "../pages/ServicePage";
 
 
 
@@ -48,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "/add-item",
         element: <AddItemPage />
+      },
+      {
+        path: "/servicePage",
+        element: <ServicePage />
       }
     ]
   },
