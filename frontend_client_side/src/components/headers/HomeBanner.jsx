@@ -40,9 +40,9 @@ const HomeBanner = () => {
             return (
               <SwiperSlide id='bannerSlide' className='w-full bg-cover bg-center ' style={{backgroundImage: `linear-gradient(259deg, rgba(21, 21, 21, 0.21) 11.86%, rgba(21, 21, 21, 0.49) 56.33%, rgba(21, 21, 21, 0.70) 96.32%), url(${it})`}} key={index}>
                 <div className='w-[90%] mx-auto text-white px-4 pt-24 md:pt-28 lg:pt-32 pb-16 md:pb-20 lg:pb-28   '>
-                  <p className='font-Montserrat font-semibold text-lg md:text-xl pb-2  '> Skill Learning Made Simple </p>
-                  <h3 className='font-Montserrat text-4xl md:text-5xl lg:text-6xl  font-bold max-w-[850px] pb-4 '> Revolutionizing Education & Skill Learning! </h3>
-                  <p className='text-sm md:text-base max-w-[600px] '> Empowering institutions, tutors, and students with a seamless learning experience. Manage classes, track progress, and enhance skills—all track progress, and enhance skills—all in one place. </p>
+                  <p className='font-Montserrat font-semibold text-lg md:text-xl pb-2  '> Campus Marketplace Made Easy </p>
+                  <h3 className='font-Montserrat text-4xl md:text-5xl lg:text-6xl  font-bold max-w-[850px] pb-4 '> Buy, Sell & Connect — All Within Your University! </h3>
+                  <p className='text-sm md:text-base max-w-[600px] '> Verified student-only platform for trading items and services. Safe meetups, real-time chat, and everything in one place. </p>
                 </div>
               </SwiperSlide>
             )
